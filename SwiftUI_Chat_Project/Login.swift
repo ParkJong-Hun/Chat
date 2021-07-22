@@ -40,7 +40,7 @@ struct Login: View {
                         EmptyView()
                     }
                     NavigationLink(
-                        destination: Error(errorMessage: $errorMessage).navigationBarHidden(true),
+                        destination: Error(errorMessage: $errorMessage),
                         isActive: $isError
                     ) {
                         EmptyView()

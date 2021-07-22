@@ -20,18 +20,20 @@ struct Chat: View {
             }
             .navigationBarTitle("Chat", displayMode: .inline)
             .navigationBarItems(
-                leading: Button(action : {
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
-                    }
-                    self.mode.wrappedValue.dismiss()
-                })  {
+                leading: Button(action : logout)  {
                         Text("Log out")
                 })
         }
+    }
+    
+    func logout() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+        self.mode.wrappedValue.dismiss()
     }
 }
 
