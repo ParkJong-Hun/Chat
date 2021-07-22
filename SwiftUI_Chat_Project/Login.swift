@@ -23,22 +23,24 @@ struct Login: View {
     var body: some View {
             NavigationView() {
                 ZStack {
-                    Button(action: LoginButtonClick) {
-                        Text("GITHUB LOGIN")
-                            .frame(width:200, height:60)
-                            .font(.title2)
-                            .background(Color.black.opacity(0.6))
-                            .foregroundColor(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    VStack {
+                        Button(action: LoginButtonClick) {
+                            Text("GITHUB LOGIN")
+                                .frame(width:200, height:60)
+                                .font(.title2)
+                                .background(Color.black.opacity(0.6))
+                                .foregroundColor(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                        }
                     }
                     NavigationLink(
-                        destination: Chat(),
+                        destination: Chat().navigationBarHidden(true),
                         isActive: $isSigned
                     ) {
                         EmptyView()
                     }
                     NavigationLink(
-                        destination: Error(errorMessage: $errorMessage),
+                        destination: Error(errorMessage: $errorMessage).navigationBarHidden(true),
                         isActive: $isError
                     ) {
                         EmptyView()
