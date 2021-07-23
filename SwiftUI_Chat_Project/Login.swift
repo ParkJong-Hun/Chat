@@ -14,10 +14,12 @@ struct Login: View {
     //github를 이용하기 위해 provider 가져옴
     var provider = OAuthProvider(providerID: "github.com")
     //Firebase의 Auth를 이용하기 위한 객체 생성
-    let auth = Auth.auth()
+    var auth = Auth.auth()
+    //에러 메세지
     @State var errorMessage:String = ""
-    @State var currentUser:String = ""
+    //로그인 성공적으로 되었는가
     @State var isSigned = false
+    //에러가 발생했는가
     @State var isError = false
     
     var body: some View {
@@ -50,26 +52,30 @@ struct Login: View {
     }
     
     func LoginButtonClick() {
+        //provider에서 credential을 가져옴
         provider.getCredentialWith(nil) { credential, error in
+            //에러일 때
             if error != nil {
-                //에러
                 isSigned = false
                 isError = true
                 errorMessage = error.debugDescription
             }
+            //Credential 있음
             if credential != nil {
+                //로그인 시작
                 auth.signIn(with: credential!) { authResult, error in
+                    //에러일 때
                     if error != nil {
-                        //에러
                         isSigned = false
                         isError = true
                         errorMessage = error.debugDescription
+                    } else {
+                        isSigned = true
                     }
                     //유저 로그인됨
                     guard let oauthCredential = authResult?.credential! as? OAuthCredential else { return
                         //OAuth access Token 내용
                     }
-                    isSigned = true
                 }
             }
         }

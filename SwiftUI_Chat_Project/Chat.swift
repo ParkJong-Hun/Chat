@@ -12,6 +12,12 @@ import FirebaseAuth
 
 struct Chat: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State var firebaseAuth = Auth.auth()
+    @State var userName:String = ""
+    
+    init() {
+        _userName = State(initialValue: firebaseAuth.currentUser?.displayName ?? "nil")
+    }
     
     var body: some View {
         NavigationView {
@@ -27,7 +33,6 @@ struct Chat: View {
     }
     
     func logout() {
-        let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
         } catch let signOutError as NSError {
