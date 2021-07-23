@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct TheyMessage:View {
+    @Binding var userName:String
+    @Binding var text:String
+    @Binding var date:Date
+    var dateFormatter:DateFormatter = DateFormatter()
+    
+    func dateInit() {
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("This is Text")
+                Text("\(text)")
                     .font(.title3)
                     .background(Color.black.opacity(0.3).cornerRadius(5))
                     .foregroundColor(.white)
                 VStack(alignment: .leading) {
-                    Text("TheyName")
-                    Text("2222/22/22 22:22")
+                    Text("\(userName)")
+                    Text("\(dateFormatter.string(from: date))")
                 }.font(.footnote)
             }
         }.frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
-
-struct TheyMessage_Previews: PreviewProvider {
-    static var previews: some View {
-        TheyMessage()
     }
 }

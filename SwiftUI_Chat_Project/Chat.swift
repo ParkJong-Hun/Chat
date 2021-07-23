@@ -22,7 +22,7 @@ struct Chat: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Chat Page")
+                Message()
             }
             .navigationBarTitle("Chat", displayMode: .inline)
             .navigationBarItems(
