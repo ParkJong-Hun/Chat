@@ -22,13 +22,17 @@ struct Chat: View {
     var body: some View {
         NavigationView {
             VStack {
-                Message()
+                List {
+                    Message()
+                }
+                .navigationBarTitle("Chat", displayMode: .inline)
+                .navigationBarItems(
+                    leading: Button(action : logout)  {
+                            Text("Log out")
+                    })
+                .listStyle(PlainListStyle())
+                Input()
             }
-            .navigationBarTitle("Chat", displayMode: .inline)
-            .navigationBarItems(
-                leading: Button(action : logout)  {
-                        Text("Log out")
-                })
         }
     }
     
