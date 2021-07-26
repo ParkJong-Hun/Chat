@@ -18,12 +18,17 @@ struct Input: View {
             }
             .frame(height: 50)
             .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/.opacity(0.1), width:1)
-            Button(action: {}){
-                Text("전송")
-                    .frame(width: 60, height: 50)
-                    .background(Color.black.opacity(0.6))
-                    .foregroundColor(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+            ZStack {
+                Rectangle()
+                    .fill(Color.green.opacity(0.6))
+                .cornerRadius(4.0)
+                .shadow(radius: 5.0)
+                .frame(width: 60, height: 50)
+                Button(action: {}){
+                    Text("전송")
+                        .frame(width: 60, height: 50)
+                        .foregroundColor(.white)
+                }
             }
         }.frame(alignment: .bottom)
     }

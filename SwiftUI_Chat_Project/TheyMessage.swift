@@ -24,7 +24,7 @@ struct TheyMessage:View {
         VStack(alignment: .leading) {
             HStack {
                 Text("\(text)")
-                    .font(.title3)
+                    .font(.title2)
                     .background(Color.black.opacity(0.3).cornerRadius(5))
                     .foregroundColor(.white)
                 VStack(alignment: .leading) {
@@ -33,5 +33,7 @@ struct TheyMessage:View {
                 }.font(.footnote)
             }
         }.frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.bottom, 7)
+        .padding(.top, 7)
     }
 }

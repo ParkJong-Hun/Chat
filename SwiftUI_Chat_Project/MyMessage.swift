@@ -28,10 +28,12 @@ struct MyMessage: View {
                     Text("\(dateFormatter.string(from: date))")
                 }.font(.footnote)
                 Text("\(text)")
-                    .font(.title3)
-                    .background(Color.black.opacity(0.6).cornerRadius(5))
+                    .font(.title2)
+                    .background(Color.green.opacity(0.6).cornerRadius(5))
                     .foregroundColor(.white)
             }
         }.frame(maxWidth: .infinity, alignment: .trailing)
+        .padding(.bottom, 7)
+        .padding(.top, 7)
     }
 }
