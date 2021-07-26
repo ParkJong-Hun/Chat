@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct TheyMessage:View {
-    @Binding var userName:String
-    @Binding var text:String
-    @Binding var date:Date
+    var userName:String
+    var text:String
+    var date:Date
     var dateFormatter:DateFormatter = DateFormatter()
     
-    func dateInit() {
+    init(userName:String, text:String, date:Date) {
+        self.userName = userName
+        self.text = text
+        self.date = date
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
     }
     
