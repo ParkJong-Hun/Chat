@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 struct Input: View {
     @State var inputText:String = ""
@@ -24,13 +26,24 @@ struct Input: View {
                 .cornerRadius(4.0)
                 .shadow(radius: 5.0)
                 .frame(width: 60, height: 50)
-                Button(action: {}){
+                Button(action: Submit){
                     Text("전송")
                         .frame(width: 60, height: 50)
                         .foregroundColor(.white)
                 }
             }
         }.frame(alignment: .bottom)
+    }
+    
+    func Submit() {
+        let date = Date()
+        let uid = Auth.auth().currentUser!.uid
+        let userName = Auth.auth().currentUser!.displayName ?? "nil"
+        let inputSet:[String:Any] = ["meesageDate" : date,
+                                     "text" : inputText,
+                                     "uid" : uid,
+                                     "userName" : userName]
+        Firestore.firestore().collection("Chat").document("\(date)_\(uid)").setData(inputSet)
     }
 }
 
