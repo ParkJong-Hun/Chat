@@ -73,7 +73,7 @@ struct Login: View {
                         isSigned = true
                     }
                     //유저 로그인됨
-                    guard let oauthCredential = authResult?.credential! as? OAuthCredential else { return
+                    guard (authResult?.credential! as? OAuthCredential) != nil else { return
                         //OAuth access Token 내용
                     }
                 }

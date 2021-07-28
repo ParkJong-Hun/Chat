@@ -42,7 +42,7 @@ struct Input: View {
         let date = Date()
         let uid = Auth.auth().currentUser!.uid
         let userName = Auth.auth().currentUser!.displayName ?? "nil"
-        let inputSet:[String:Any] = ["meesageDate" : date,
+        let inputSet:[String:Any] = ["messageDate" : date,
                                      "text" : inputText,
                                      "uid" : uid,
                                      "userName" : userName]

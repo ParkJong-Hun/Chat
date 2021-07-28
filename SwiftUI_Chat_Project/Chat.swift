@@ -14,7 +14,7 @@ struct Chat: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @State var firebaseAuth = Auth.auth()
     @State var userName:String = ""
-    
+    let messageData = MessageData()
     init() {
         _userName = State(initialValue: firebaseAuth.currentUser?.displayName ?? "nil")
     }
@@ -23,7 +23,7 @@ struct Chat: View {
         NavigationView {
             VStack {
                 List {
-                    Message()
+                    Message(messageData: messageData)
                 }
                 .navigationBarTitle("Chat", displayMode: .inline)
                 .navigationBarItems(

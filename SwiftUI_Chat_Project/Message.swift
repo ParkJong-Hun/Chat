@@ -6,29 +6,29 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 import FirebaseFirestore
 
 struct Message: View {
-    let db = Firestore.firestore()
-    var texts:[String] = ["This is Text", "This is Text2"]
-    var userNames:[String] = ["Me", "Johns"]
-    var dates:Date = Date()
-    var uid:[String] = []
+    @ObservedObject var messageData:MessageData
     var body: some View {
         VStack {
-            ForEach(userNames, id: \.self) { userName in
-                if(userName == "Me") {
-                    MyMessage(userName: userNames[0], text: texts[0], date: dates)
-                } else {
-                    TheyMessage(userName: userNames[1], text: texts[1], date: dates)
+            if messageData.texts.count != 0 {
+                ForEach(0..<messageData.texts.count, id: \.self) { index in
+                    if(messageData.uids[index] == Auth.auth().currentUser?.uid) {
+                        MyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index])
+                    } else {
+                        TheyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index])
+                    }
                 }
             }
-        }.frame(alignment: .top)
+        }.frame(alignment: .top).frame(minHeight: 0).onAppear() {self.messageData.updateData()}
     }
 }
 
-struct Message_Previews: PreviewProvider {
+/*struct Message_Previews: PreviewProvider {
+    let messageData = MessageData()
     static var previews: some View {
-        Message()
+        Message(messageData: messageData)
     }
-}
+}*/

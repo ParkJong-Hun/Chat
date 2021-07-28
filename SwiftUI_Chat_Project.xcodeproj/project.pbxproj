@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B07D49A26B11B3C0010B533 /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B07D49926B11B3C0010B533 /* MessageData.swift */; };
 		6B5AC9D626A7D3B800AC5691 /* SwiftUI_Chat_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AC9D526A7D3B800AC5691 /* SwiftUI_Chat_ProjectApp.swift */; };
 		6B5AC9D826A7D3B800AC5691 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AC9D726A7D3B800AC5691 /* ContentView.swift */; };
 		6B5AC9DA26A7D3B900AC5691 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B5AC9D926A7D3B900AC5691 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B07D49926B11B3C0010B533 /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
 		6B5AC9D226A7D3B800AC5691 /* SwiftUI_Chat_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Chat_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B5AC9D526A7D3B800AC5691 /* SwiftUI_Chat_ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Chat_ProjectApp.swift; sourceTree = "<group>"; };
 		6B5AC9D726A7D3B800AC5691 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				6B745B2B26AA6D5F000950C1 /* MyMessage.swift */,
 				6B745B2D26AA6EAB000950C1 /* TheyMessage.swift */,
 				6B83712E26AE899300262373 /* Input.swift */,
+				6B07D49926B11B3C0010B533 /* MessageData.swift */,
 			);
 			path = SwiftUI_Chat_Project;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				6B5AC9D826A7D3B800AC5691 /* ContentView.swift in Sources */,
 				6B745B2E26AA6EAB000950C1 /* TheyMessage.swift in Sources */,
 				6B745B2A26AA571C000950C1 /* Message.swift in Sources */,
+				6B07D49A26B11B3C0010B533 /* MessageData.swift in Sources */,
 				6B70942926A918C000DA76A8 /* Chat.swift in Sources */,
 				6B83712F26AE899300262373 /* Input.swift in Sources */,
 				6B5AC9D626A7D3B800AC5691 /* SwiftUI_Chat_ProjectApp.swift in Sources */,
