@@ -14,6 +14,9 @@ struct Input: View {
     @State var isEditing:Bool = false
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
+            Rectangle()
+                .fill(Color.white)
+                .frame(width:30, height: 50)
             TextField("Text me", text: $inputText) {
                 isEditing in
                 self.isEditing = isEditing
@@ -44,6 +47,7 @@ struct Input: View {
                                      "uid" : uid,
                                      "userName" : userName]
         Firestore.firestore().collection("Chat").document("\(date)_\(uid)").setData(inputSet)
+        inputText = ""
     }
 }
 
