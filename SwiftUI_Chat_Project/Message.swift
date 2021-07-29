@@ -37,9 +37,10 @@ struct Message: View {
                                 }
                             }
                         }.onChange(of: isMine) { _ in
-                            if self.isMine == true {
+                            if self.isMine {
+                                print("이동하는 위치 : \(lastId)")
                                 proxy.scrollTo(lastId)
-                                isMine = false
+                                isMine.toggle()
                             }
                         }
                     }

@@ -15,13 +15,19 @@ struct Input: View {
         HStack(alignment: .center, spacing: 0) {
             Rectangle()
                 .fill(Color.white)
-                .frame(width:30, height: 50)
-            TextField("Text me", text: $inputText) {
-                isEditing in
-                self.isEditing = isEditing
+                .frame(width:10, height: 50)
+            ZStack {
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(width:310, height:50)
+                    .border(Color.black.opacity(0.1), width:1)
+                TextField("Text me", text: $inputText) {
+                    isEditing in
+                    self.isEditing = isEditing
+                }
+                .frame(height: 50)
+                .offset(x: 15)
             }
-            .frame(height: 50)
-            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/.opacity(0.1), width:1)
             ZStack {
                 Rectangle()
                     .fill(Color.green.opacity(0.6))

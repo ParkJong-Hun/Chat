@@ -4,7 +4,6 @@
 //
 //  Created by 박종훈 on 2021/07/28.
 //
-
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
@@ -38,7 +37,7 @@ class MessageData: ObservableObject {
                     }
                 }
             }
-            print("결과물: \(self.userNames), \(self.uids), \(self.texts), \(self.dates)")
+            print("Updated: \(Date())")
         }
     }
 }
