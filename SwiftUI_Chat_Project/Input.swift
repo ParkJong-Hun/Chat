@@ -41,7 +41,7 @@ struct Input: View {
     func Submit() {
         let date = Date()
         let uid = Auth.auth().currentUser!.uid
-        let userName = Auth.auth().currentUser!.displayName ?? "nil"
+        let userName = Auth.auth().currentUser!.displayName ?? "\(Auth.auth().currentUser!.email)"
         let inputSet:[String:Any] = ["messageDate" : date,
                                      "text" : inputText,
                                      "uid" : uid,
