@@ -4,11 +4,10 @@
 //
 //  Created by 박종훈 on 2021/07/26.
 //
-
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
-
+//MARK: 내용 작성 UI
 struct Input: View {
     @State var inputText:String = ""
     @State var isEditing:Bool = false
@@ -37,11 +36,11 @@ struct Input: View {
             }
         }.frame(alignment: .bottom)
     }
-    
+    //전송 버튼 클릭 시
     func Submit() {
-        let date = Date()
-        let uid = Auth.auth().currentUser!.uid
-        let userName = Auth.auth().currentUser!.displayName ?? "\(Auth.auth().currentUser!.email)"
+        let date:Date = Date()
+        let uid:String = Auth.auth().currentUser!.uid
+        let userName:String = Auth.auth().currentUser!.displayName ?? Auth.auth().currentUser!.email as! String
         let inputSet:[String:Any] = ["messageDate" : date,
                                      "text" : inputText,
                                      "uid" : uid,
@@ -50,7 +49,6 @@ struct Input: View {
         inputText = ""
     }
 }
-
 struct Input_Previews: PreviewProvider {
     static var previews: some View {
         Input()

@@ -8,12 +8,13 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-
+//MARK: 데이터베이스에서 가져온 데이터 관리
 class MessageData: ObservableObject {
     @Published private(set) var texts:[String] = []
     @Published private(set) var dates:[Date] = []
     @Published private(set) var userNames:[String] = []
     @Published private(set) var uids:[String] = []
+    //데이터가 추가될 때마다 갱신
     func updateData() {
         _ = Firestore.firestore().collection("Chat").addSnapshotListener {
             querySnapshot, error in

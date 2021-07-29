@@ -4,9 +4,8 @@
 //
 //  Created by 박종훈 on 2021/07/22.
 //
-
 import SwiftUI
-
+//MARK: 에러 페이지
 struct Error: View {
     @Binding var errorMessage:String
     var body: some View {
@@ -18,10 +17,3 @@ struct Error: View {
         }
     }
 }
-
-/*struct Error_Previews: PreviewProvider {
-    @State var sampleStr:String = "Error is it"
-    static var previews: some View {
-        Error(errorMessage: $sampleStr)
-    }
-}*/

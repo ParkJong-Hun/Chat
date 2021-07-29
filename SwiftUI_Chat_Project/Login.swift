@@ -4,12 +4,9 @@
 //
 //  Created by 박종훈 on 2021/07/22.
 //
-
 import SwiftUI
-import CryptoKit
-import AuthenticationServices
 import FirebaseAuth
-
+//MARK: 로그인 페이지
 struct Login: View {
     //github를 이용하기 위해 provider 가져옴
     var provider = OAuthProvider(providerID: "github.com")
@@ -21,11 +18,11 @@ struct Login: View {
     @State var isSigned = false
     //에러가 발생했는가
     @State var isError = false
-    
     var body: some View {
             NavigationView() {
                 ZStack {
                     VStack {
+                        //로그인 버튼
                         Button(action: LoginButtonClick) {
                             Text("GITHUB LOGIN")
                                 .frame(width:200, height:60)
@@ -35,12 +32,14 @@ struct Login: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
                     }
+                    //채팅 페이지로 이동
                     NavigationLink(
                         destination: Chat().navigationBarHidden(true),
                         isActive: $isSigned
                     ) {
                         EmptyView()
                     }
+                    //에러 페이지로 이동
                     NavigationLink(
                         destination: Error(errorMessage: $errorMessage),
                         isActive: $isError
@@ -50,7 +49,7 @@ struct Login: View {
                 }.navigationBarTitle("Simple Chat", displayMode: .inline)
             }
     }
-    
+    //로그인 버튼 클릭 시
     func LoginButtonClick() {
         //provider에서 credential을 가져옴
         provider.getCredentialWith(nil) { credential, error in
@@ -81,7 +80,6 @@ struct Login: View {
         }
     }
 }
-
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
         Login()
