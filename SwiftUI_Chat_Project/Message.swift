@@ -13,10 +13,9 @@ struct Message: View {
     @ObservedObject var messageData:MessageData
     //마지막으로 추가된 메시지가 내가 작성한건지 판별
     @State var isMine:Bool = false
-    //스크롤을 바꾸기 위한 위치
-    @State var lastId = 0
     var body: some View {
         VStack {
+            //내가 작성했을 때 스크롤 맨 아래로 이동
             ScrollViewReader { proxy in
                 ScrollView {
                     if messageData.texts.count != 0 {
@@ -26,8 +25,9 @@ struct Message: View {
                                 MyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index]).onAppear{
                                     if(index == messageData.texts.count - 1) {
                                         self.isMine = true
+                                        print("ID: \(index)")
                                     }
-                                }.id(lastId)
+                                }.id(index)
                             } else {
                                 //상대 메시지 판별해 렌더링
                                 TheyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index]).onAppear{
@@ -36,15 +36,14 @@ struct Message: View {
                                     }
                                 }
                             }
-                        }.onChange(of: isMine) { _ in
+                        }.onAppear{
                             if self.isMine {
-                                print("이동하는 위치 : \(lastId)")
-                                proxy.scrollTo(lastId)
-                                isMine.toggle()
+                                withAnimation{ proxy.scrollTo(messageData.texts.count - 1, anchor: .bottom) }
+                                isMine = false
                             }
                         }
                     }
-                }
+                }.frame(maxHeight: 660)
             }
         }.frame(alignment: .top).frame(minHeight: 0).onAppear() {
             //새 메시지 갱신
