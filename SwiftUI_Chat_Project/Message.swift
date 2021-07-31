@@ -13,37 +13,61 @@ struct Message: View {
     @ObservedObject var messageData:MessageData
     //마지막으로 추가된 메시지가 내가 작성한건지 판별
     @State var isMine:Bool = false
+    @State var isClicked:Bool = false
+    @State var lastText:String = ""
     var body: some View {
         VStack {
             //내가 작성했을 때 스크롤 맨 아래로 이동
             ScrollViewReader { proxy in
-                ScrollView {
-                    if messageData.texts.count != 0 {
-                        ForEach(0..<messageData.texts.count, id: \.self) { index in
-                            if(messageData.uids[index] == Auth.auth().currentUser?.uid) {
-                                //내 메시지 판별해 렌더링
-                                MyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index]).onAppear{
-                                    if(index == messageData.texts.count - 1) {
-                                        self.isMine = true
-                                        print("ID: \(index)")
-                                    }
-                                }.id(index)
-                            } else {
-                                //상대 메시지 판별해 렌더링
-                                TheyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index]).onAppear{
-                                    if(index == messageData.texts.count - 1) {
-                                        self.isMine = false
-                                    }
+                ZStack {
+                    ScrollView {
+                        if messageData.texts.count != 0 {
+                            ForEach(0..<messageData.texts.count, id: \.self) { index in
+                                if(messageData.uids[index] == Auth.auth().currentUser?.uid) {
+                                    //내 메시지 판별해 렌더링
+                                    MyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index]).onAppear{
+                                        if(index == messageData.texts.count - 1) {
+                                            isMine = true
+                                            isClicked = true
+                                        }
+                                    }.id(index)
+                                } else {
+                                    //상대 메시지 판별해 렌더링
+                                    TheyMessage(userName: messageData.userNames[index], text: messageData.texts[index], date: messageData.dates[index]).onAppear{
+                                        if(index == messageData.texts.count - 1) {
+                                            isMine = false
+                                            isClicked = false
+                                            lastText = messageData.texts[index]
+                                        }
+                                    }.id(index)
+                                }
+                            }.onAppear{
+                                if isMine {
+                                    withAnimation{ proxy.scrollTo(messageData.texts.count - 1, anchor: .bottom) }
+                                    isClicked = true
+                                    isMine = false
                                 }
                             }
-                        }.onAppear{
-                            if self.isMine {
-                                withAnimation{ proxy.scrollTo(messageData.texts.count - 1, anchor: .bottom) }
-                                isMine = false
-                            }
                         }
+                    }.frame(maxHeight: 660)
+                    //아래로 버튼
+                    if !isClicked && !isMine {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.green.opacity(0.6))
+                                .frame(width:130, height: 30)
+                                .shadow(radius: 5)
+                            Button("▼ Move Down", action: {
+                                withAnimation{ proxy.scrollTo(messageData.texts.count - 1, anchor: .bottom) }
+                                isClicked = true
+                            })
+                                .foregroundColor(.white)
+                                .frame(width:150, height: 30)
+                                .font(.callout)
+                            Text(lastText).bold().font(.callout).foregroundColor(.white).background(Color.black.opacity(0.3).cornerRadius(5)).offset(y: 30)
+                        }.frame(width:150, height:30).frame(alignment: .bottom).offset(y: 230)
                     }
-                }.frame(maxHeight: 660)
+                }
             }
         }.frame(alignment: .top).frame(minHeight: 0).onAppear() {
             //새 메시지 갱신
